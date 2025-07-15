@@ -59,14 +59,7 @@ def visualize_data(code: str):
 
     try:
         print("Generated Code:\n", code)
-        exec(code)
-        fig = plt.gcf()
-        os.makedirs("plots", exist_ok=True)
-        fig.savefig(image_path, bbox_inches='tight', dpi=300)
-        fig.show()
-        plt.close(fig)
-        print(f"Visualization saved to: {image_path}")
-        return image_path
+        return code
 
     except Exception as e:
         print("Error during visualization:")
@@ -225,11 +218,21 @@ if uploaded_file:
                         # logging.info(f"Tool {tool_name} result: {result}")
                     except Exception as e:
                         logging.info(f"An Error Occurred: {e}")
+                elif tool_name == "visualize_data":
+                    args = tool_call.args
+                    visualization_code = args["code"]
+                    print("Visualization Code", visualization_code)
+                    exec(visualization_code)
+                    with st.chat_message("assistant"):
+                        st.markdown("Visualization Generated for a Query")
+                        st.pyplot(plt.gcf(), use_container_width = False)
+                        print("Visualization call Successful")
+
             except Exception as e:
                 logging.info(f"Error executing tool {tool_name}: {type(e).__name__}: {e}")
             
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            st.session_state.messages.append({"role": "assistant", "content": reply})
+            # st.session_state.messages.append({"role": "user", "content": prompt})
+            # st.session_state.messages.append({"role": "assistant", "content": reply})
         
         # for message in st.session_state.messages:
         #     with st.chat_message(message["role"]):

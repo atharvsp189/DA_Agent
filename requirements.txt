@@ -4,3 +4,8 @@ openpyxl
 matplotlib
 seaborn
 plotly
+python-dotenv
+langchain
+langchain-google-genai
+langchain_core
+langchain_community

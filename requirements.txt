@@ -4,6 +4,7 @@ openpyxl
 matplotlib
 seaborn
 plotly
+tabulate
 python-dotenv
 langchain
 langchain-google-genai
@@ -11,3 +12,6 @@ langchain_core
 langchain_community
 langgraph
 streamlit
+llama-index
+llama-index-core
+llama-index-llms-gemini
